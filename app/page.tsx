@@ -5,7 +5,7 @@ import HomeHeader from '../component/home/homeheader';
 import Login from './login/page';
 import Footer from '@/component/footer';
 import Register from '@/app/register/page';
-import Dashboard from '@/app/dashboard/page';
+import Dashboard from '../component/dashboard/page';
 
 export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,7 +19,7 @@ export default function Home() {
  setIsLoggedIn(false);
  };
  if (isLoggedIn) {
- return <Dashboard logout={logout} />;
+ return <Dashboard />;
  }
 
   return (
