@@ -1,24 +1,33 @@
 "use client";
-import Link from 'next/link';
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, Row, Col, Container } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const Dashboard = ({ logout }) => {
+const Dashboard = () => {
     const router = useRouter();
+
+    // Redirect to login if user is not logged in
+    useEffect(() => {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        if (isLoggedIn !== 'true') {
+            router.push('/');
+        }
+    }, [router]);
+
+    const handleLogout = () => {
+        localStorage.removeItem('isLoggedIn');
+        router.push('/');
+    };
 
     return (
         <div>
-            <div className="d-flex justify-content-end gap-2 mb-3">
-                <button className="btn btn-outline-primary" onClick={() => router.push('/')}>
-                    Go to Homepage
-                </button>
-                <button className="btn btn-dark" onClick={logout}>
+            <div className="d-flex justify-content-end gap-2 mb-3 p-3">
+                <button className="btn btn-dark" onClick={handleLogout}>
                     Logout
-                </button> 
+                </button>
             </div>
-
             <Container fluid className="p-4">
                 <h2 className="mb-4 text-center">Welcome to PetCare Dashboard</h2>
 
